@@ -73,6 +73,7 @@ class FilterScenario(BaseScenario):
 
         return getted_item_elems == excepted_item_elems
     
+    # Get a list of WebElement instances resulted by "Price low to high" (or "Price high to low", in cases of reverse equals True) filter
     def getItemsPriceAuto(self):
 
         if self.base_url != self.driver.current_url:
@@ -92,3 +93,33 @@ class FilterScenario(BaseScenario):
             item_elems = self.driver.find_elements(by=By.CLASS_NAME, value="inventory_item")
 
             return item_elems
+    
+    # Function used on sorted built-in function
+    @staticmethod
+    def sortItemByPrice(item_elem):
+
+        price_item_elem = item_elem.find_element(by=By.CLASS_NAME, value="inventory_item_price")
+        price_item = float(price_item_elem.text.replace("$", ""))
+
+        return price_item
+    
+    # Shows getted (User simulation) and expected price items and compares their lists that contains WebElement instances, returning a boolean that indicates their similarity
+    def comparePriceWithExpectedResult(self):
+
+        getted_item_elems = self.getItemsPriceAuto()
+
+        item_elems = self.driver.find_elements(by=By.CLASS_NAME, value="inventory_item")
+
+        expected_item_elems = sorted(item_elems, key=FilterScenario.sortedItemByPrice, reverse=self.reverse)
+
+        print("\033[1;34mGETTED \033[m|\033[1;32m EXPECTED\033[m")
+        for i in range(len(getted_item_elems)):
+
+            getted_price_item_elem = getted_item_elems[i].find_element(by=By.CLASS_NAME, value="inventory_item_price")
+            expected_price_item_elem = expected_item_elems[i].find_element(by=By.CLASS_NAME, value="inventory_item_price")
+
+            print(f"\033[1;34m{getted_price_item_elem.text} \033[m|\033[1;32m {
+                  expected_price_item_elem.text}\033[m")
+            
+        return getted_item_elems == expected_item_elems
+
