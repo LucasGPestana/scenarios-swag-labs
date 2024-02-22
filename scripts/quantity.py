@@ -16,3 +16,14 @@ class QuantityScenario(BaseScenario):
       button_add_cart.click()
 
     return item_elems
+  
+  def compareQuantityWithExpectedResult(self):
+
+    getted_item_elems = self.getSelectedItemsAuto()
+
+    expected_quantity_item = self.driver.find_element(by=By.CLASS_NAME, value="shopping_cart_badge")
+
+    print("\033[1;34mGETTED \033[m|\033[1;32m EXPECTED\033[m")
+    print(f"\033[1;34m{len(getted_item_elems)} \033[m|\033[1;32m {expected_quantity_item.text}\033[m")
+
+    return len(getted_item_elems) == int(expected_quantity_item.text)
