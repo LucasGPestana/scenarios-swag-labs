@@ -120,7 +120,7 @@ class FilterScenario(BaseScenario):
             by=By.CLASS_NAME, value="inventory_item")
 
         expected_item_elems = sorted(
-            item_elems, key=FilterScenario.sortedItemByPrice, reverse=self.reverse)
+            item_elems, key=FilterScenario.sortItemByPrice, reverse=self.reverse)
 
         print("\033[1;34mGETTED \033[m|\033[1;32m EXPECTED\033[m")
         for i in range(len(getted_item_elems)):
