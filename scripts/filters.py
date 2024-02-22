@@ -72,3 +72,23 @@ class FilterScenario(BaseScenario):
                   expected_name_item_elem.text}\033[m")
 
         return getted_item_elems == excepted_item_elems
+    
+    def getItemsPriceAuto(self):
+
+        if self.base_url != self.driver.current_url:
+
+            sys.exit("A URL atual é diferente da URL base!")
+        
+        else:
+
+            filter_elem = self.driver.find_element(by=By.CLASS_NAME, value="product_sort_container")
+            filter_elem.click()
+
+            option_filter_elems = filter_elem.find_elements(by=By.TAG_NAME, value="option")
+
+            selected_option_elem = list(filter(lambda x: x.get_attribute("value") == "lohi", option_filter_elems))[0] if not self.reverse else list(filter(lambda x: x.get_attribute("value") == "hilo", option_filter_elems))[0]
+            selected_option_elem.click()
+
+            item_elems = self.driver.find_elements(by=By.CLASS_NAME, value="inventory_item")
+
+            return item_elems
