@@ -30,4 +30,4 @@ class QuantityScenario(BaseScenario):
     print("\033[1;34mGETTED \033[m|\033[1;32m EXPECTED\033[m")
     print(f"\033[1;34m{len(getted_item_elems)} \033[m|\033[1;32m {expected_quantity_item.text}\033[m")
 
-    return len(getted_item_elems) == int(expected_quantity_item.text)
+    assert len(getted_item_elems) == int(expected_quantity_item.text)

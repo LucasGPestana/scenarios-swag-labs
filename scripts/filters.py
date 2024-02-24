@@ -71,7 +71,7 @@ class FilterScenario(BaseScenario):
             print(f"\033[1;34m{getted_name_item_elem.text} \033[m|\033[1;32m {
                   expected_name_item_elem.text}\033[m")
 
-        return getted_item_elems == excepted_item_elems
+        assert getted_item_elems == excepted_item_elems
 
     # Get a list of WebElement instances resulted by "Price low to high" (or "Price high to low", in cases of reverse equals True) filter
     def getItemsPriceAuto(self):
@@ -133,4 +133,4 @@ class FilterScenario(BaseScenario):
             print(f"\033[1;34m{getted_price_item_elem.text} \033[m|\033[1;32m {
                   expected_price_item_elem.text}\033[m")
 
-        return getted_item_elems == expected_item_elems
+        assert getted_item_elems == expected_item_elems

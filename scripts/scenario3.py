@@ -4,10 +4,10 @@ if __name__ == "__main__":
 
   third_scenario = FilterScenario("https://www.saucedemo.com/inventory.html")
 
-  if third_scenario.comparePriceWithExpectedResult():
-
-    print("Os resultados foram iguais!")
+  try:
   
-  else:
+    third_scenario.comparePriceWithExpectedResult()
+  
+  except AssertionError:
 
-    print("Os resultados foram diferentes!")
+    print("As listas são diferentes!")
